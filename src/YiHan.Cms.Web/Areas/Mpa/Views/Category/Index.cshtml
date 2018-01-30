@@ -1,0 +1,36 @@
+﻿@using Abp.Web.Mvc.Extensions;
+@using YiHan.Cms.Web.Navigation
+@{
+    ViewBag.Title = "List";
+    ViewBag.CurrentPageName = PageNames.App.Category.CategoryList;
+}
+
+<link href="~/libs/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<style>
+    .bars {
+        height: auto;
+    }
+</style>
+<div class="page-head">
+    <div class="col-xs-6">
+        <div class="page-title">
+            <h1>
+                <span>@L("Category")</span> <small>@L("CategoryHeaderInfo")</small>
+            </h1>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <a href="javascript:;"  class="btn btn-primary blue openModel"><i class="fa fa-plus"></i> 新增分类</a>
+    </div>
+</div>
+
+<section class="content portlet light">
+    
+    <div class="tourdetail-body">
+        <table id="detail-grid"></table>
+    </div>
+</section>
+@section Scripts{
+
+<script src="~/Areas/Mpa/Views/Category/ScriptOrCss/List.js"></script>
+}

@@ -1,0 +1,95 @@
+﻿@model YiHan.Cms.CmsApp.Dtos.CategoryEditDto
+@using YiHan.Cms.CmsApp.Dtos;
+@{
+    ViewBag.Title = "_CreateOrUpdate";
+}
+@{
+    Layout = null;
+}
+<div class="catelgory clearfix">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">
+            <span>添加分类</span>
+        </h4>
+    </div>
+    <div class="modal-body">
+        <ul class="nav nav-tabs ">
+            <li class="active">
+                <a href="#CatelgoryBaseData" data-toggle="tab" aria-expanded="true">
+                    基本信息
+                </a>
+            </li>
+            <li class="">
+                <a href="#CatelgorySeo" data-toggle="tab" aria-expanded="false">
+                    Seo优化
+                </a>
+            </li>
+        </ul>
+        <form novalidate="novalidate" name="Catelgoryfrom">
+            @Html.HiddenFor(model => model.Id, new { @class = "form-control" })
+                <div class="tab-content">
+                    <div class="tab-pane active" id="CatelgoryBaseData">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            @Html.TextBoxFor(model => model.Category_Name, new { @class = "form-control", @required = "required" })
+                            <label>分类名称</label>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            @Html.TextBoxFor(model => model.Rank, new { @class = "form-control" })
+                            <label>排序</label>
+                        </div>
+                        <div class="md-checkbox-list">
+                            <div class="md-checkbox">
+                                <input id="EditStatus_IsDefault" class="md-check" type="checkbox" name="Status" value="true" @Html.Raw(Model.Status==true? "checked=\"checked\"" : "")>
+                                <label  for="EditStatus_IsDefault">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                    是否显示
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                                @Html.TextAreaFor(model => model.Category_Desc, new { @class = "form-control", rows = "6" })
+                                <label>分类描述</label>
+                            </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                                @{
+                                    List<SelectListItem> selectList = new List<SelectListItem>();
+                                    selectList.Add(new SelectListItem { Text = "无父级", Value = "" });
+                                    foreach (var c in ViewBag.cateGoryList)
+                                    {
+                                        if (Model.Id !=c.Id)
+                                        {
+                                            selectList.Add(new SelectListItem { Text = c.Category_Name, Value = c.Id.ToString() });
+                                        }
+
+
+                                    }
+                                }
+                                @Html.DropDownListFor(model => model.ParentId, selectList, new { @class = "form-control" })
+
+                            </div>
+               </div>
+                        <div class="tab-pane " id="CatelgorySeo">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                @Html.TextBoxFor(model => model.WebTitle, new { @class = "form-control" })
+                                <label>Seo标题</label>
+                            </div>
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                @Html.TextBoxFor(model => model.WebKeyWord, new { @class = "form-control" })
+                                <label>Seo关键词</label>
+                            </div>
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                @Html.TextAreaFor(model => model.WebDescription, new { @class = "form-control", rows = "6" })
+                                <label>Seo描述</label>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn default close-button" data-dismiss="modal">取消</button>
+        <button type="button" class="btn blue save-button"><i class="fa fa-save"></i> <span>保存</span></button>
+    </div>
+</div>

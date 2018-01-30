@@ -1,0 +1,270 @@
+﻿@using Abp.Web.Mvc.Extensions;
+@model  YiHan.Cms.CmsApp.Dtos.ArticeEditDto
+@{
+    ViewBag.Title = "Create";
+
+}
+@Html.IncludeScript("~/libs/ckeditor/ckeditor.js")
+@Html.IncludeStyle("~/libs/ckeditor/contents.css")
+@Html.IncludeScript("~/ckfinder/ckfinder.js")
+@Html.IncludeStyle("~/Areas/Mpa/Views/Artice/ScriptOrCss/CreateOrEdit.css")
+
+<div class="page-head">
+    <div class="col-xs-6">
+        <div class="page-title">
+            <h1>
+                <span>@L("Artice")</span> <small>@L("CreateArtice")</small>
+            </h1>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <a href="@Url.Action("Index")" class="btn btn-primary blue"><i class="fa fa-plus"></i> 返回列表</a>
+    </div>
+</div>
+<section class="content">
+    <div class="portlet-body">
+        <form name="ArticeForm">
+            @Html.AntiForgeryToken()
+            <div class="page-head">
+                <div class="options pull-left">
+                    <a href="javascript:;" name="save" class="btn btn-primary saveBtn" >保存</a>
+
+                </div>
+
+            </div>
+            @Html.HiddenFor(model => model.Id)
+            <div id="product-edit">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#product_info" data-toggle="tab">基本信息</a>
+                        </li>
+
+                        <li>
+                            <a href="#product_seo" data-toggle="tab">优化信息</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="product_info">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <!-- 图片信息 -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="box-title"><i class="icon-credit-card icons"></i>商品图片</h3>
+                                                </div>
+                                                <div class="panel-body Art_PicBox">
+                                                    <input type="text" class="xFilePath" value="@Model.Art_CoverUrl" name="Art_CoverUrl" readOnly />
+                                                    <input type="button" class="PicIturl" value="浏览" onclick="BrowseServer()" />
+                                                    <br />
+                                                    <img id="Art_CoverUrl" src="@Model.Art_CoverUrl" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- 销售信息 -->
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="box-title"><i class="icon-credit-card icons"></i>状态信息</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <table class="adminContent table table-responsive">
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">排序</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextBoxFor(model => model.Rank, new { @class = "form-control", @required = "required" })
+                                                                @Html.ValidationMessageFor(model => model.Rank)
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">点击率</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextBoxFor(model => model.Hits, new { @class = "form-control"})
+                                                                @Html.ValidationMessageFor(model => model.Hits)
+                                                            </td>
+                                                        </tr>
+                                                        
+                                                    </table>
+                                                    <div class="md-checkbox-list">
+                                                        <div class="md-checkbox">
+                                                            <input id="Status" class="md-check" type="checkbox" name="Status" value="true" @Html.Raw(Model.Status == true ? "checked=\"checked\"" : "")>
+                                                            <label for="Status">
+                                                                <span class="inc"></span>
+                                                                <span class="check"></span>
+                                                                <span class="box"></span>
+                                                                是否显示
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="md-checkbox-list">
+                                                        <div class="md-checkbox">
+                                                            <input id="IsHot" class="md-check" type="checkbox" name="IsHot" value="true" @Html.Raw(Model.IsHot == true ? "checked=\"checked\"" : "")>
+                                                            <label for="IsHot">
+                                                                <span class="inc"></span>
+                                                                <span class="check"></span>
+                                                                <span class="box"></span>
+                                                                是否显示
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="md-checkbox-list">
+                                                        <div class="md-checkbox">
+                                                            <input id="IsTop" class="md-check" type="checkbox" name="IsTop" value="true" @Html.Raw(Model.IsTop == true ? "checked=\"checked\"" : "")>
+                                                            <label for="IsTop">
+                                                                <span class="inc"></span>
+                                                                <span class="check"></span>
+                                                                <span class="box"></span>
+                                                                是否置顶
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <!-- 基本信息 -->
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="box-title"><i class="icon-credit-card icons"></i>基本信息</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <table class="adminContent table table-responsive">
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">标题</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextBoxFor(model => model.Art_Name, new { @class = "form-control", @required = "required" })
+                                                                @Html.ValidationMessageFor(model => model.Art_Name)
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">副标题</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextBoxFor(model => model.Art_SubName, new { @class = "form-control"})
+                                                                @Html.ValidationMessageFor(model => model.Art_SubName)
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">归属分类</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @{
+                                                                    List<SelectListItem> selectList = new List<SelectListItem>();
+                                                                    foreach (var c in ViewBag.cateGoryList)
+                                                                    {
+                                                                        if (Model.Category_ID != c.Id)
+                                                                        {
+                                                                            selectList.Add(new SelectListItem { Text = c.Category_Name, Value = c.Id.ToString() });
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            selectList.Add(new SelectListItem { Text = c.Category_Name, Value = c.Id.ToString(),Selected= true });
+                                                                        }
+
+
+                                                                    }
+                                                                }
+                                                                @Html.DropDownListFor(model => model.Category_ID, selectList, new { @class = "form-control" })
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">文章标签</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextBoxFor(model => model.Art_Tag, new { @class = "form-control"})
+                                                                @Html.ValidationMessageFor(model => model.Art_Tag)
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="adminTitle">
+                                                                <label class="control-label" for="PreSell">文章内容</label>
+                                                            </td>
+                                                            <td class="adminData">
+                                                                @Html.TextAreaFor(model => model.Art_Content)
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="product_seo">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <table class="adminContent table table-responsive">
+                                        <tr>
+
+                                            <td class="adminTitle">
+                                                <label class="control-label" for="PreSell">seo标题</label>
+                                            </td>
+                                            <td class="adminData">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-amazon"></i></span>
+                                                    @Html.TextBoxFor(model => model.WebTitle, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.WebTitle)
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="adminTitle">
+                                                <label class="control-label" for="PreSell">seo关键词</label>
+                                            </td>
+                                            <td class="adminData">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-amazon"></i></span>
+                                                    @Html.TextBoxFor(model => model.WebKeyWord, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.WebKeyWord)
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="adminTitle">
+                                                <label class="control-label" for="PreSell">seo描述</label>
+                                            </td>
+                                            <td class="adminData">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-amazon"></i></span>
+                                                    @Html.TextAreaFor(model => model.WebDescription, new { @class = "form-control", rows = "6" })
+                                                    @Html.ValidationMessageFor(model => model.WebDescription)
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+@section Scripts{
+   
+    <script src="~/Areas/Mpa/Views/Artice/ScriptOrCss/CreateOrEdit.js"></script>
+   
+}

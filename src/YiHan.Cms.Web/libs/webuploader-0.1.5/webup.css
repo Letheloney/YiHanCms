@@ -1,0 +1,53 @@
+.cp_img {
+    float: left;
+    border: 1px solid #d3d3d3;
+    margin-left: 5px;
+    position: relative;
+}
+
+
+
+.cp_img_jian {
+    width: 110px;
+    height: 82px;
+    position: absolute;
+    background: url(/Images/cp_img_sc.png) no-repeat;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+}
+
+.cp_img_jia {
+    width: 91px;
+    height: 91px;
+    border: 1px solid #d3d3d3;
+    margin: 0 auto;
+    background: url(/Images/cp_img_tj.png) no-repeat;
+    margin-bottom: 15px;
+}
+
+    .cp_img_jia:hover {
+        background: url(/Images/cp_img_tj_a.png) no-repeat;
+    }
+
+.fgx {
+    width: 800px;
+    height: 1px;
+    margin: 40px auto 20px;
+    background: #d3d3d3;
+}
+
+.webuploader-pick {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    opacity: 0;
+}

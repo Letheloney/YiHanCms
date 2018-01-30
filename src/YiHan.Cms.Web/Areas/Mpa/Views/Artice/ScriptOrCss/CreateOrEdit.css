@@ -1,0 +1,9 @@
+﻿#Art_CoverUrl {
+    border: solid 1px #e9e6e6;
+    width: 205px;
+    height: 190px;
+    margin-top: 25px;
+}
+.Art_PicBox {
+    text-align: center;
+}

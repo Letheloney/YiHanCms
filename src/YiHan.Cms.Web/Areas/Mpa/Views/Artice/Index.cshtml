@@ -1,0 +1,72 @@
+﻿@using Abp.Web.Mvc.Extensions;
+@using YiHan.Cms.Web.Navigation
+@{
+    ViewBag.Title = "List";
+    ViewBag.CurrentPageName = PageNames.App.Artice.ArticeList;
+}
+
+<link href="~/libs/jquery-treegrid/css/jquery.treegrid.min.css" rel="stylesheet" />
+<style>
+    .bars {
+        height: auto;
+    }
+</style>
+<div class="page-head">
+    <div class="col-xs-6">
+        <div class="page-title">
+            <h1>
+                <span>@L("Artice")</span> <small>@L("ArticeHeaderInfo")</small>
+            </h1>
+        </div>
+    </div>
+    <div class="col-xs-6 text-right">
+        <a href="/Mpa/Artice/CreateOrEdit" class="btn btn-primary blue "><i class="fa fa-plus"></i> 新增文章</a>
+    </div>
+</div>
+
+<section class="content portlet light">
+    <div class="row" id="toolbar">
+        <div class="col-md-3">
+            <div class="form-group">
+                <input id="search_Name" placeholder="文章名称" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <select id="search_status" class="form-control">
+                    <option value="true" selected>发布</option>
+                    <option value="false">未发布</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                @{
+                    List<SelectListItem> selectList = new List<SelectListItem>();
+                    selectList.Add(new SelectListItem { Text = "全部", Value = "-1" });
+                    
+                    foreach (var c in ViewBag.cateGoryList)
+                    {
+
+                        selectList.Add(new SelectListItem { Text = c.Category_Name, Value = c.Id.ToString() });
+
+
+
+                    }
+                }
+                @Html.DropDownList("cateGory", selectList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a href="#" class="btn btn-social-icon" id="search"><i class="fa fa-search"></i></a>
+        </div>
+
+    </div>
+    <div class="tourdetail-body">
+        <table id="detail-grid"></table>
+    </div>
+</section>
+@section Scripts{
+
+    <script src="~/Areas/Mpa/Views/Artice/ScriptOrCss/List.js"></script>
+}

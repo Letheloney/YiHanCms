@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "IndexTemp";
+}
+   @Html.AntiForgeryToken()
+    <pre id="code" class="ace_editor" style="min-height:400px">
+        <textarea class="temp form-control" rows="20" name="htmlTemp">
+        </textarea>
+    </pre>
+    <input class="Path form-control" name="Path" />
+    <a  href="javascript:;" class="btn btn-sm createTemp" > 生成静态页</a>
+<script src="~/libs/ace-builds-master/src-noconflict/ace.js"></script>
+<script src="~/libs/ace-builds-master/src-noconflict/ext-language_tools.js" type="text/javascript"></script>
+<script>
+            //初始化对象
+          var  editor = ace.edit("code");
+
+            //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+            theme = "clouds"
+            language = "html"
+            editor.setTheme("ace/theme/" + theme);
+            editor.session.setMode("ace/mode/" + language);
+
+            //字体大小
+            editor.setFontSize(18);
+
+            //设置只读（true时只读，用于展示代码）
+            editor.setReadOnly(false);
+
+            //自动换行,设置为off关闭
+            editor.setOption("wrap", "free")
+
+            //启用提示菜单
+            ace.require("ace/ext/language_tools");
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true
+            });
+</script>
+@section Scripts{
+<script>
+            $(".createTemp").click(function () {
+                $.ajax({
+                    url: "/Mpa/TempSystem/IndexTemp",
+                    type: "Post",
+                    data: {
+                        htmlTemp: editor.getValue(),
+                        Path: $(".path").val()
+                    },
+                    success: function (data) {
+                        if (data == true)
+                        {
+                            swal("生成成功！", "", "success")
+                        }
+                        else
+                        {
+                            swal("生成失败！", "", "error")
+                        }
+                    }
+                })
+            });
+</script>
+}
