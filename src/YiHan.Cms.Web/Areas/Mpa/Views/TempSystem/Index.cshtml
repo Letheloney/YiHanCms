@@ -41,20 +41,14 @@
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                @{
-                    List<SelectListItem> selectList = new List<SelectListItem>();
-                    selectList.Add(new SelectListItem { Text = "全部", Value = "-1" });
-
-                    foreach (var c in ViewBag.cateGoryList)
-                    {
-
-                        selectList.Add(new SelectListItem { Text = c.Category_Name, Value = c.Id.ToString() });
-
-
-
-                    }
-                }
-                @Html.DropDownList("cateGory", selectList, new { @class = "form-control" })
+            <select>
+                <option value="0">全部模板</option>
+                <option value="1">首页模板</option>
+                <option value="2">栏目模板</option>
+                <option value="3">内容模板</option>
+                <option value="4">单页模板</option>
+                <option value="5">布局模板</option>
+            </select>
             </div>
         </div>
         <div class="col-md-1">

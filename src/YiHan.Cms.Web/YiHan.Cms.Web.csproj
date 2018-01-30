@@ -623,6 +623,7 @@
     <Content Include="Areas\Mpa\Views\Artice\ScriptOrCss\List.js" />
     <Content Include="Areas\Mpa\Views\Category\ScriptOrCss\List.js" />
     <Content Include="Areas\Mpa\Views\Category\ScriptOrCss\_CreateOrEditModal.js" />
+    <Content Include="Areas\Mpa\Views\TempSystem\ScriptOrCss\List.js" />
     <Content Include="ckfinder\bin\Debug\CKFinder.dll" />
     <Content Include="ckfinder\bin\Debug\CKFinder.pdb" />
     <Content Include="ckfinder\bin\Release\CKFinder.dll" />

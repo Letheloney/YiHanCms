@@ -33,6 +33,7 @@ namespace YiHan.Cms.EntityFramework
         public virtual IDbSet<Category> Category { get; set; }
         public virtual IDbSet<ImGallery> ImGallery { get; set; }
         public virtual IDbSet<ImgCategory> ImgCategory { get; set; }
+        public virtual IDbSet<Templates> Templates { get; set; }
         public CmsDbContext()
             : base("Default")
         {
